@@ -1,0 +1,73 @@
+create database manage_patients;
+use database manage_patients;
+create table patient(
+name varchar(255),
+address varchar(255),
+dob varchar(10),
+contact int(10)
+);
+create table medical_history(
+id int(10) primary key,
+diagnosis varchar(255),
+treatments varchar(255),
+surgeries varchar(255),
+medications varchar(255)
+);
+create table lab_results(
+id int(10) ,
+blood_tests varchar(255),
+urine_tests varchar(255),
+imaging_tests varchar(255),
+id foreign key references medical_history(id)
+);
+create table prescriptions(
+medication_name varchar(255),
+dosage varchar(10),
+frequency int(10)
+);
+create table outcome
+(
+readmission_rates varchar(100),
+medication adherence varchar(100)
+);
+create database library_management;
+use library_management;
+create table books(
+book_id int(10) primary key,
+title varchar(50),
+author varchar(20),
+publisher varchar(20),
+publication_year varchar(10),
+ISBN varchar(10),
+genre varchar(15),
+availability boolean
+);
+create table borrowers(
+borrower_id int(10) primary key,
+name varchar(255),
+address varchar(255),
+phonenumber int(10),
+email varchar(255)
+);
+create table loans(
+loan_id int(10),
+book_id int(10),
+borrower_id int(10),
+primary key (loan_id),
+date_borrowed varchar(10),
+due_date varchar(10),
+date_returned varchar(10),
+book_id foreign key references books(book_id),
+borrower_id foreign key references borrowers(borrower_id)
+);
+create table reservations(
+reservation_id int(10),
+book_id int(10),
+borrower_id int(10),
+primary key (reservation_id),
+date_reserved int(10),
+date_needed int(10),
+status varchar(10),
+book_id foreign key references books(book_id),
+borrower_id foreign key references borrowers(borrower_id)
+);
